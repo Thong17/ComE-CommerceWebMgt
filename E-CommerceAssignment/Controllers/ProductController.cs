@@ -18,6 +18,13 @@ namespace E_CommerceAssignment.Controllers
             ListProductViewModel listProduct = new ListProductViewModel();
             listProduct.Brands = dbContext.getBrands.ToList();
             listProduct.Products = dbContext.getProducts.ToList();
+            listProduct.EachProductsOfBrands = new List<int>();
+            foreach(var brand in listProduct.Brands)
+            {
+                List<ProductModels> productsOfBrands = dbContext.getProductBrands(brand.BrandId).ToList();
+                int numberOfBrand = productsOfBrands.Count;
+                listProduct.EachProductsOfBrands.Add(numberOfBrand);
+            }
             
             return View(listProduct);
         }

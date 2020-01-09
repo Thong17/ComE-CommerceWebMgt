@@ -421,6 +421,43 @@ namespace E_CommerceAssignment.Models
             }
             return products;
         }
+
+        public IEnumerable<ProductModels> getProductBrands(int id)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+            List<ProductModels> products = new List<ProductModels>();
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("getProductBrands", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramModelId = new SqlParameter();
+                paramModelId.ParameterName = "@BrandId";
+                paramModelId.Value = id;
+                cmd.Parameters.Add(paramModelId);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ProductModels product = new ProductModels();
+                    product.Id = Convert.ToInt32(reader["Id"]);
+                    product.Price = Convert.ToDouble(reader["Price"]);
+                    product.Color = reader["Color"].ToString();
+                    product.Storage = reader["Storage"].ToString();
+                    product.Processor = reader["Processor"].ToString();
+                    product.Memory = reader["Memory"].ToString();
+                    product.Display = reader["Display"].ToString();
+                    product.Details = reader["Details"].ToString();
+                    product.ModelId = Convert.ToInt32(reader["ModelId"]);
+                    product.BrandId = Convert.ToInt32(reader["BrandId"]);
+
+                    products.Add(product);
+                }
+            }
+            return products;
+        }
         
     }
 }

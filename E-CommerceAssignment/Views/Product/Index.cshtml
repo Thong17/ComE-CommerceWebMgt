@@ -14,10 +14,10 @@
     <div class="row">
         <div class="col-md-4">
             <ul>
-                @foreach (var brand in Model.Brands)
+                @for (var i = 0; i < Model.Brands.Count; i++)
                 {
                     <li>
-                        @Html.ActionLink(brand.Brand, "GetModel", new { id= brand.BrandId })
+                        @Html.ActionLink(Model.Brands[i].Brand, "GetModel", new { id= Model.Brands[i].BrandId }) has @Model.EachProductsOfBrands[i]
                     </li>
                 }
             </ul>
