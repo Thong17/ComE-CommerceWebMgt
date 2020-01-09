@@ -1,0 +1,42 @@
+﻿@model E_CommerceAssignment.ViewModels.ListProductViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddBrand")
+</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <ul>
+                @foreach (var brand in Model.Brands)
+                {
+                    <li>
+                        @Html.ActionLink(brand.Brand, "GetModel", new { id= brand.BrandId })
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul>
+                @foreach(var product in Model.Products)
+                {
+                    <li>
+                        @product.Details
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+    
+
+
