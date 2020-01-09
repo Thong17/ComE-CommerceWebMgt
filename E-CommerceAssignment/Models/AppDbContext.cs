@@ -162,7 +162,8 @@ namespace E_CommerceAssignment.Models
                 cmd.Parameters.Add(paramCreatedDate);
 
                 con.Open();
-                cmd.ExecuteNonQuery();
+                int Id = Convert.ToInt32(cmd.ExecuteScalar());
+                product.Id = Id;
             }
         }
 
@@ -337,6 +338,7 @@ namespace E_CommerceAssignment.Models
                     while (reader.Read())
                     {
                         ProductModels product = new ProductModels();
+                        product.Id = Convert.ToInt32(reader["Id"]);
                         product.Price = Convert.ToDouble(reader["Price"]);
                         product.Color = reader["Color"].ToString();
                         product.Storage = reader["Storage"].ToString();

@@ -17,15 +17,51 @@ namespace E_CommerceAssignment.Controllers
             AppDbContext dbContext = new AppDbContext();
             ListProductViewModel listProduct = new ListProductViewModel();
             listProduct.Brands = dbContext.getBrands.ToList();
-            listProduct.Products = dbContext.getProducts.ToList();
+
+            List<ProductModels> products = dbContext.getProducts.ToList();
+            List<GetProductViewModel> getProducts = new List<GetProductViewModel>();
+
+            /*Get products details*/
+            foreach(var item in products)
+            {
+                ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == item.ModelId);
+                BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == model.BrandId);
+                CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == model.CategoryId);
+
+                GetProductViewModel getProduct = new GetProductViewModel
+                {
+                    Id = item.Id,
+                    Name = model.Name,
+                    Brand = brand.Brand,
+                    Category = category.Category,
+                    Price = item.Price,
+                    Color = item.Color,
+                    Storage = item.Storage,
+                    Processor = item.Processor,
+                    Memory = item.Memory,
+                    Display = item.Display,
+                    Details = item.Details,
+                    CreatedBy = item.CreatedBy,
+                    CreatedDate = item.CreatedDate
+                };
+                getProduct.Photos = dbContext.getProductPhotos(item.Id).ToList();
+
+                getProducts.Add(getProduct);
+            }
+
+            listProduct.Products = getProducts;
+            
+            /*Get the number of each product in a brand*/
             listProduct.EachProductsOfBrands = new List<int>();
             foreach(var brand in listProduct.Brands)
             {
                 List<ProductModels> productsOfBrands = dbContext.getProductBrands(brand.BrandId).ToList();
+
                 int numberOfBrand = productsOfBrands.Count;
                 listProduct.EachProductsOfBrands.Add(numberOfBrand);
             }
             
+            /*Create Index view with product details*/
             return View(listProduct);
         }
 
@@ -256,8 +292,8 @@ namespace E_CommerceAssignment.Controllers
                         Src = photoPath,
                         Title = uniqName,
 
-                        /*Working on get last index for created product*/
-                        ProductId = 11
+                        /*Get Id from the addProduct cmd.ExecuteScalar()*/
+                        ProductId = productModels.Id
                     };
                     productModels.Photos.Add(photo);
 

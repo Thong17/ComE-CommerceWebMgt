@@ -9,7 +9,7 @@ namespace E_CommerceAssignment.ViewModels
     public class ListProductViewModel
     {
         public List<BrandModels> Brands { get; set; }
-        public List<ProductModels> Products { get; set; }
+        public List<GetProductViewModel> Products { get; set; }
         public List<int> EachProductsOfBrands { get; set; }
     }
 }
