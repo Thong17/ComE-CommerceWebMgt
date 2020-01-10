@@ -15,6 +15,7 @@
         <hr />
         @Html.HiddenFor(m => m.BrandId)
         @Html.HiddenFor(m => m.ModelId)
+        @Html.HiddenFor(m => m.CategoryId)
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">

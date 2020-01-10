@@ -1,20 +1,15 @@
 ﻿using E_CommerceAssignment.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace E_CommerceAssignment.ViewModels
 {
-    public class AddModelViewModels : BrandModels 
+    public class EditProductViewModel : ProductModels
     {
-        [Required]
-        [RegularExpression("[^ ]+ [^ ]+")]
-        public string Name { get; set; }
-        [Required]
         public List<BrandModels> Brands { get; set; }
-        [Required]
         public List<CategoryModels> Categories { get; set; }
+        public List<ModelModels> Models { get; set; }
     }
 }

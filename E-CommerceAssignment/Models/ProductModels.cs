@@ -13,25 +13,33 @@ namespace E_CommerceAssignment.Models
         public double Price { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string Color { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string Storage { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string Processor { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string Memory { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string Display { get; set; }
+
 
         public string Details { get; set; }
 
         public int ModelId { get; set; }
 
         public int BrandId { get; set; }
+
+        public int CategoryId { get; set; }
 
         public string CreatedBy { get; set; }
 

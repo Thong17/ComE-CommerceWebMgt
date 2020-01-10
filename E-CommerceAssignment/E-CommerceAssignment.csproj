@@ -187,6 +187,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddModelViewModels.cs" />
     <Compile Include="ViewModels\AddProductViewModel.cs" />
+    <Compile Include="ViewModels\EditProductViewModel.cs" />
     <Compile Include="ViewModels\GetProductViewModel.cs" />
     <Compile Include="ViewModels\ListProductViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
@@ -257,6 +258,9 @@
     <Content Include="Views\Product\AddProduct.cshtml" />
     <Content Include="Views\Product\GetModel.cshtml" />
     <Content Include="Views\Product\Products.cshtml" />
+    <Content Include="Views\Product\EditProduct.cshtml" />
+    <Content Include="Views\Product\EditBrand.cshtml" />
+    <Content Include="Views\Product\EditCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

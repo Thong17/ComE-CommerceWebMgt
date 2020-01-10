@@ -23,19 +23,24 @@
             </ul>
         </div>
         <div class="col-md-6">
+            @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+            {
+                <div class="form-group">
+                    @Html.TextBox("search", null, new { @class = "form-control" }) <input type="submit" value="Search" class="btn btn-default" />
+                </div>
+            }
             <ul>
-                @foreach(var product in Model.Products)
-                {
-                    <li>
-                        @product.Name
-                    </li>
-                    foreach(var photo in product.Photos)
+                <li>
+                    @foreach (var product in Model.Products)
                     {
-                        <div class="img-thumbnail">
+                        @product.Name
+
+                        foreach (var photo in product.Photos)
+                        {
                             <img src='@photo.Path/@photo.Title' width="100" height="100" />
-                        </div>
+                        }
                     }
-                }
+                </li>
             </ul>
         </div>
     </div>

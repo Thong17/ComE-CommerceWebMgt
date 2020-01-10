@@ -10,6 +10,7 @@ namespace E_CommerceAssignment.Models
     {
         public int BrandId { get; set; }
         [Required]
+        [MaxLength(100)]
         public string Brand { get; set; }
         public string BrandDetails { get; set; }
     }

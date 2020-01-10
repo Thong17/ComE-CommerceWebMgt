@@ -9,6 +9,7 @@ namespace E_CommerceAssignment.Models
     public class CategoryModels
     {
         public int CategoryId { get; set; }
+        [MaxLength(100)]
         public string Category { get; set; }
         public string CategoryDetails { get; set; }
     }

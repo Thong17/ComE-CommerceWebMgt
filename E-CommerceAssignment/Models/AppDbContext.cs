@@ -151,6 +151,11 @@ namespace E_CommerceAssignment.Models
                 paramModelId.Value = product.ModelId;
                 cmd.Parameters.Add(paramModelId);
 
+                SqlParameter paramCategoryId = new SqlParameter();
+                paramCategoryId.ParameterName = "@CategoryId";
+                paramCategoryId.Value = product.CategoryId;
+                cmd.Parameters.Add(paramCategoryId);
+
                 SqlParameter paramCreatedBy = new SqlParameter();
                 paramCreatedBy.ParameterName = "@CreatedBy";
                 paramCreatedBy.Value = product.CreatedBy;
@@ -346,8 +351,11 @@ namespace E_CommerceAssignment.Models
                         product.Memory = reader["Memory"].ToString();
                         product.Display = reader["Display"].ToString();
                         product.Details = reader["Details"].ToString();
+                        product.CreatedBy = reader["CreatedBy"].ToString();
+                        product.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
                         product.ModelId = Convert.ToInt32(reader["ModelId"]);
                         product.BrandId = Convert.ToInt32(reader["BrandId"]);
+                        product.CategoryId = Convert.ToInt32(reader["CategoryId"]);
 
                         products.Add(product);
                     }
@@ -417,6 +425,7 @@ namespace E_CommerceAssignment.Models
                     product.Details = reader["Details"].ToString();
                     product.ModelId = Convert.ToInt32(reader["ModelId"]);
                     product.BrandId = Convert.ToInt32(reader["BrandId"]);
+                    product.CategoryId = Convert.ToInt32(reader["CategoryId"]);
 
                     products.Add(product);
                 }
@@ -454,12 +463,71 @@ namespace E_CommerceAssignment.Models
                     product.Details = reader["Details"].ToString();
                     product.ModelId = Convert.ToInt32(reader["ModelId"]);
                     product.BrandId = Convert.ToInt32(reader["BrandId"]);
+                    product.CategoryId = Convert.ToInt32(reader["CategoryId"]);
 
                     products.Add(product);
                 }
             }
             return products;
         }
-        
+
+        public void updateBrand(BrandModels brand)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("updateBrand", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = brand.BrandId;
+                cmd.Parameters.Add(paramId);
+
+                SqlParameter paramBrand = new SqlParameter();
+                paramBrand.ParameterName = "@Brand";
+                paramBrand.Value = brand.Brand;
+                cmd.Parameters.Add(paramBrand);
+
+                SqlParameter paramDetails = new SqlParameter();
+                paramDetails.ParameterName = "@Details";
+                paramDetails.Value = brand.BrandDetails;
+                cmd.Parameters.Add(paramDetails);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void updateCategory(CategoryModels category)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("updateCategory", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = category.CategoryId;
+                cmd.Parameters.Add(paramId);
+
+                SqlParameter paramCategory = new SqlParameter();
+                paramCategory.ParameterName = "@Category";
+                paramCategory.Value = category.Category;
+                cmd.Parameters.Add(paramCategory);
+
+                SqlParameter paramDetails = new SqlParameter();
+                paramDetails.ParameterName = "@Details";
+                paramDetails.Value = category.CategoryDetails;
+                cmd.Parameters.Add(paramDetails);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
     }
 }

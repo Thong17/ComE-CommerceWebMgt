@@ -12,7 +12,7 @@ namespace E_CommerceAssignment.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             AppDbContext dbContext = new AppDbContext();
             ListProductViewModel listProduct = new ListProductViewModel();
@@ -49,7 +49,8 @@ namespace E_CommerceAssignment.Controllers
                 getProducts.Add(getProduct);
             }
 
-            listProduct.Products = getProducts;
+            /*Search product*/
+            listProduct.Products = getProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).ToList();
             
             /*Get the number of each product in a brand*/
             listProduct.EachProductsOfBrands = new List<int>();
@@ -197,7 +198,8 @@ namespace E_CommerceAssignment.Controllers
                 BrandId = brand.BrandId,
                 Model = model.Name,
                 ModelId = model.Id,
-                Category = category.Category
+                Category = category.Category,
+                CategoryId = category.CategoryId
             };
 
             return View(addProductView);
@@ -266,6 +268,7 @@ namespace E_CommerceAssignment.Controllers
                 productModels.Details = product.Details;
                 productModels.BrandId = product.BrandId;
                 productModels.ModelId = product.ModelId;
+                productModels.CategoryId = product.CategoryId;
                 productModels.CreatedBy = User.Identity.Name;
                 productModels.CreatedDate = DateTime.Now;
 
@@ -307,6 +310,106 @@ namespace E_CommerceAssignment.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult EditBrand(int id)
+        {
+            AppDbContext dbContext = new AppDbContext();
+            BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == id);
+
+            return View(brand);
+        }
+
+        [HttpPost]
+        public ActionResult EditBrand(FormCollection collection)
+        {
+            if (ModelState.IsValid)
+            {
+                int Id = Convert.ToInt32(collection["BrandId"]);
+                string Brand = collection["Brand"];
+                string Details = collection["BrandDetails"];
+
+                AppDbContext dbContext = new AppDbContext();
+                BrandModels brand = new BrandModels
+                {
+                    BrandId = Id,
+                    Brand = Brand,
+                    BrandDetails = Details
+                };
+                dbContext.updateBrand(brand);
+
+                return RedirectToAction("Brands");
+            }
+            return View(collection);
+        }
+
+        [HttpGet]
+        public ActionResult EditCategory(int id)
+        {
+            AppDbContext dbContext = new AppDbContext();
+            CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == id);
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(FormCollection collection)
+        {
+            if (ModelState.IsValid)
+            {
+                int Id = Convert.ToInt32(collection["CategoryId"]);
+                string Category = collection["Category"];
+                string Details = collection["CategoryDetails"];
+
+                AppDbContext dbContext = new AppDbContext();
+                CategoryModels category = new CategoryModels
+                {
+                    CategoryId = Id,
+                    Category = Category,
+                    CategoryDetails = Details
+                };
+                dbContext.updateCategory(category);
+
+                return RedirectToAction("Categories");
+            }
+
+            return View(collection);
+        }
+
+        public ActionResult EditProduct(int id)
+        {
+            AppDbContext dbContext = new AppDbContext();
+
+            ProductModels product = dbContext.getProducts.SingleOrDefault(p => p.Id == id);
+            ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == product.ModelId);
+            List<BrandModels> brands = dbContext.getBrands.ToList();
+            List<CategoryModels> categories = dbContext.getCategories.ToList();
+            List<ProductPhoto> photos = dbContext.getProductPhotos(product.Id).ToList();
+            List<ModelModels> models = dbContext.getModelBrands(model.BrandId).ToList();
+            EditProductViewModel viewModel = new EditProductViewModel
+            {
+                Id = product.Id,
+                Models = models,
+                ModelId = product.ModelId,
+                Brands = brands,
+                BrandId = product.BrandId,
+                Categories = categories,
+                CategoryId = product.CategoryId,
+                Price = product.Price,
+                Color = product.Color,
+                Storage = product.Storage,
+                Processor = product.Processor,
+                Memory = product.Memory,
+                Display = product.Display,
+                Details = product.Details,
+                CreatedBy = product.CreatedBy,
+                CreatedDate = product.CreatedDate,
+                Photos = photos
+            };
+
+
+            return View(viewModel);
         }
     }
 }

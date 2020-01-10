@@ -11,6 +11,7 @@
 </p>
 <h2>@Model.Name</h2>
 <h5>@Model.Brand</h5>
+<h5>@Model.Category</h5>
 <table class="table">
     @foreach (var product in Model.Products)
         {
@@ -37,7 +38,7 @@
                     @Html.DisplayFor(modelItem => product.Color)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = product.Id }) |
+                    @Html.ActionLink("Edit", "EditProduct", new { id = product.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = product.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = product.Id })
                 </td>

@@ -11,7 +11,6 @@ namespace E_CommerceAssignment.ViewModels
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Category { get; set; }
-        public int MyProperty { get; set; }
         public List<HttpPostedFileBase> Photo { get; set; }
     }
 }
