@@ -529,5 +529,101 @@ namespace E_CommerceAssignment.Models
             }
         }
 
+        public void updateProduct(ProductModels product)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("updateProduct", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = product.Id;
+                cmd.Parameters.Add(paramId);
+
+                SqlParameter paramPrice = new SqlParameter();
+                paramPrice.ParameterName = "@Price";
+                paramPrice.Value = product.Price;
+                cmd.Parameters.Add(paramPrice);
+
+                SqlParameter paramColor = new SqlParameter();
+                paramColor.ParameterName = "@Color";
+                paramColor.Value = product.Color;
+                cmd.Parameters.Add(paramColor);
+
+                SqlParameter paramStorage = new SqlParameter();
+                paramStorage.ParameterName = "@Storage";
+                paramStorage.Value = product.Storage;
+                cmd.Parameters.Add(paramStorage);
+
+                SqlParameter paramProcessor = new SqlParameter();
+                paramProcessor.ParameterName = "@Processor";
+                paramProcessor.Value = product.Processor;
+                cmd.Parameters.Add(paramProcessor);
+
+                SqlParameter paramMemory = new SqlParameter();
+                paramMemory.ParameterName = "@Memory";
+                paramMemory.Value = product.Memory;
+                cmd.Parameters.Add(paramMemory);
+
+                SqlParameter paramDisplay = new SqlParameter();
+                paramDisplay.ParameterName = "@Display";
+                paramDisplay.Value = product.Display;
+                cmd.Parameters.Add(paramDisplay);
+
+                SqlParameter paramDetails = new SqlParameter();
+                paramDetails.ParameterName = "@Details";
+                paramDetails.Value = product.Details;
+                cmd.Parameters.Add(paramDetails);
+
+                SqlParameter paramModelId = new SqlParameter();
+                paramModelId.ParameterName = "@ModelId";
+                paramModelId.Value = product.ModelId;
+                cmd.Parameters.Add(paramModelId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void updateProductPhoto(List<ProductPhoto> productPhotos)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            foreach (var photo in productPhotos)
+            {
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                    SqlCommand cmd = new SqlCommand("updateProductPhoto", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    SqlParameter paramId = new SqlParameter();
+                    paramId.ParameterName = "@Id";
+                    paramId.Value = photo.Id;
+                    cmd.Parameters.Add(paramId);
+
+                    SqlParameter paramPath = new SqlParameter();
+                    paramPath.ParameterName = "@Path";
+                    paramPath.Value = photo.Path;
+                    cmd.Parameters.Add(paramPath);
+
+                    SqlParameter paramSrc = new SqlParameter();
+                    paramSrc.ParameterName = "@Src";
+                    paramSrc.Value = photo.Src;
+                    cmd.Parameters.Add(paramSrc);
+
+                    SqlParameter paramTitle = new SqlParameter();
+                    paramTitle.ParameterName = "@Title";
+                    paramTitle.Value = photo.Title;
+                    cmd.Parameters.Add(paramTitle);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

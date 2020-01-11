@@ -377,6 +377,7 @@ namespace E_CommerceAssignment.Controllers
             return View(collection);
         }
 
+        [HttpGet]
         public ActionResult EditProduct(int id)
         {
             AppDbContext dbContext = new AppDbContext();
@@ -410,6 +411,42 @@ namespace E_CommerceAssignment.Controllers
 
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditProduct(List<HttpPostedFileBase> Photo, EditProductViewModel product)
+        {
+            if (ModelState.IsValid)
+            {
+                AppDbContext dbContext = new AppDbContext();
+                ProductModels productModels = new ProductModels();
+                productModels.Id = product.Id;
+                productModels.Price = product.Price;
+                productModels.Color = product.Color;
+                productModels.Storage = product.Storage;
+                productModels.Processor = product.Processor;
+                productModels.Memory = product.Memory;
+                productModels.Display = product.Display;
+                productModels.Details = product.Details;
+                productModels.ModelId = product.ModelId;
+
+                productModels.Photos = new List<ProductPhoto>();
+                dbContext.updateProduct(productModels);
+
+                return RedirectToAction("Index");
+
+            }
+
+            return View(product);
+        }
+
+        /*working on Edit product photo*/
+        public ActionResult EditPhoto(int id, int productId)
+        {
+            AppDbContext dbContext = new AppDbContext();
+            ProductPhoto photos = dbContext.getProductPhotos(productId).SingleOrDefault(p => p.Id == id);
+
+            return View(photos);
         }
     }
 }
