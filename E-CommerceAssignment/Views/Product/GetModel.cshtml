@@ -4,14 +4,15 @@
     ViewBag.Title = "GetModel";
 }
 
-    <div class="container">
-        <p>
-            @Html.ActionLink("Create New", "AddModel", null, new { @class = "btn btn-primary" })
-        </p>
-    </div>
+<div class="container">
+    <p>
+        @Html.ActionLink("Create New", "AddModel", null, new { @class = "btn btn-primary" })
+
+    </p>
+</div>
 
 <div class="container">
-    
+
     <table class="table">
         <tr>
             <th>
@@ -39,9 +40,9 @@
                     @Html.DisplayFor(modelItem => item.CreatedDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Add Product", "AddProduct", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Products", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Add Product", "AddProduct", new { id = item.Id }, new { @class = "btn btn-primary" }) 
+                    @Html.ActionLink("Details", "Products", new { id = item.Id }, new { @class = "btn btn-default" }) 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

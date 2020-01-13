@@ -565,5 +565,27 @@ namespace E_CommerceAssignment.Controllers
             return View(model);
         }
         /*Failed*/
+        
+
+        /*Adding multiple product*/
+        public PartialViewResult AddProducts(int id)
+        {
+            AppDbContext dbContext = new AppDbContext();
+            ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == id);
+
+            BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == model.BrandId);
+            CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == model.CategoryId);
+
+            AddProductViewModel addProductView = new AddProductViewModel
+            {
+                Brand = brand.Brand,
+                BrandId = brand.BrandId,
+                Model = model.Name,
+                ModelId = model.Id,
+                Category = category.Category,
+                CategoryId = category.CategoryId
+            };
+            return PartialView("_AddProducts", addProductView);
+        }
     }
 }
