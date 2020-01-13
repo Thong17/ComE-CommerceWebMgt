@@ -3,37 +3,40 @@
 @{
     ViewBag.Title = "Brands";
 }
+    <div class="container">
+        <h2>Brands</h2>
 
-<h2>Brands</h2>
+        <p>
+            @Html.ActionLink("Create New", "AddBrand")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BrandDetails)
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "AddBrand")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Brand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BrandDetails)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BrandDetails)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditBrand", new { id = item.BrandId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.BrandId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.BrandId })
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Brand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandDetails)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditBrand", new { id=item.BrandId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BrandId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BrandId })
-        </td>
-    </tr>
-}
+        </table>
+    </div>
 
-</table>

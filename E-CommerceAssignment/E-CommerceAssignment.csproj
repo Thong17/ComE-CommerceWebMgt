@@ -187,12 +187,28 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddModelViewModels.cs" />
     <Compile Include="ViewModels\AddProductViewModel.cs" />
+    <Compile Include="ViewModels\EditPhotoViewModel.cs" />
     <Compile Include="ViewModels\EditProductViewModel.cs" />
     <Compile Include="ViewModels\GetProductViewModel.cs" />
     <Compile Include="ViewModels\ListProductViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\UpdatePhotoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\checkbox.css" />
+    <Content Include="Content\editviewstyle.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\nouislider.css" />
+    <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\owl.theme.default.min.css" />
+    <Content Include="Content\range.slider.css" />
+    <Content Include="Content\range.slider.min.css" />
+    <Content Include="Content\textfield.css" />
+    <Content Include="Icons\iconfinder_-_Magnifier-Search-Zoom-_3844467.svg" />
+    <Content Include="Icons\iconfinder_right_1303890.svg" />
+    <Content Include="Icons\profile.svg" />
+    <Content Include="Icons\search.svg" />
+    <Content Include="Icons\shopping.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -200,7 +216,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -214,6 +230,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\nouislider.js" />
+    <Content Include="Scripts\numb.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -262,6 +282,7 @@
     <Content Include="Views\Product\EditBrand.cshtml" />
     <Content Include="Views\Product\EditCategory.cshtml" />
     <Content Include="Views\Product\EditPhoto.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

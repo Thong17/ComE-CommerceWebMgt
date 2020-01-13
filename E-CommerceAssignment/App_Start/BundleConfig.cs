@@ -22,9 +22,26 @@ namespace E_CommerceAssignment
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+            /*Custome*/
+            bundles.Add(new ScriptBundle("~/bundles/custome").Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/bootstrap.min.js",
+                        "~/Scripts/nouislider.js",
+                        "~/Scripts/numb.js",
+                        "~/Scripts/script.js"));
+
+            bundles.Add(new StyleBundle("~/Content/custome").Include(
+                      "~/Content/nouislider.css",
+                      "~/Content/textfield.css",
+                      "~/Content/checkbox.css",
+                      "~/Content/range.slider.css",
+                      "~/Content/range.slider.min.css",
+                      "~/Content/editviewstyle.css",
                       "~/Content/site.css"));
+            /*End*/
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.css"));
         }
     }
 }

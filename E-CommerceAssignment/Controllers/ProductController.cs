@@ -244,6 +244,8 @@ namespace E_CommerceAssignment.Controllers
                     productView.Category = category.Category;
                     productView.Products = products;
 
+                    ViewBag.ModelId = id;
+
                 }
                 return View(productView);
             }
@@ -305,7 +307,7 @@ namespace E_CommerceAssignment.Controllers
 
                 dbContext.addProductPhoto(productModels.Photos);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Products", "Product", new { id = product.ModelId });
                 
             }
 
@@ -431,7 +433,58 @@ namespace E_CommerceAssignment.Controllers
                 productModels.ModelId = product.ModelId;
 
                 productModels.Photos = new List<ProductPhoto>();
+                
+                ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == product.ModelId);
+
+                List<ProductPhoto> photos = new List<ProductPhoto>();
+
+                foreach (var photo in Photo)
+                {
+                    if(photo != null)
+                    {
+                        
+                        List<ProductPhoto> Photos = dbContext.getProductPhotos(product.Id).ToList();
+                        
+                        if (Photos.Count > 0)
+                        {
+                            foreach (var item in Photos)
+                            {
+                                System.IO.File.Delete(item.Src);
+                                dbContext.deleteProductPhoto(item.Id);
+                            }
+                        }
+                        
+
+                        var fileName = Path.GetFileName(photo.FileName);
+                        var path = "/Public/Products/" + model.Name;
+                        var photoUrl = Server.MapPath(path);
+                        var photoTitle = Path.GetFileNameWithoutExtension(photo.FileName);
+                        var uniqName = Guid.NewGuid().ToString() + "_" + fileName;
+
+                        if (!Directory.Exists(photoUrl))
+                        {
+                            Directory.CreateDirectory(photoUrl);
+                        }
+
+                        var photoPath = Path.Combine(photoUrl, uniqName);
+                        ProductPhoto newPhoto = new ProductPhoto
+                        {
+                            Path = path,
+                            Src = photoPath,
+                            Title = uniqName,
+                            ProductId = product.Id
+                        };
+                        photos.Add(newPhoto);
+
+                        photo.SaveAs(photoPath);
+
+                        
+                    }
+                    
+                }
+                dbContext.addProductPhoto(photos);
                 dbContext.updateProduct(productModels);
+                
 
                 return RedirectToAction("Index");
 
@@ -441,12 +494,76 @@ namespace E_CommerceAssignment.Controllers
         }
 
         /*working on Edit product photo*/
-        public ActionResult EditPhoto(int id, int productId)
+        [HttpGet]
+        public ActionResult EditPhoto(int id)
         {
             AppDbContext dbContext = new AppDbContext();
-            ProductPhoto photos = dbContext.getProductPhotos(productId).SingleOrDefault(p => p.Id == id);
+            List<ProductPhoto> photos = new List<ProductPhoto>();
+            photos = dbContext.getProductPhotos(id).ToList();
+            ProductModels product = dbContext.getProducts.SingleOrDefault(p => p.Id == id);
+            ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == product.ModelId);
+            
+            EditPhotoViewModel editPhoto = new EditPhotoViewModel
+            {
+                Model = model.Name,
+                ProductId = id,
+                Photos = photos
+            };
 
-            return View(photos);
+            return View(editPhoto);
         }
+
+        [HttpPost]
+        public ActionResult EditPhoto(EditPhotoViewModel model)
+        {
+
+            List<ProductPhoto> Photos = new List<ProductPhoto>();
+            if (ModelState.IsValid)
+            {
+                AppDbContext dbContext = new AppDbContext();
+
+                List<ProductPhoto> exPhotos = model.Photos;
+
+                if(exPhotos != null)
+                {
+                    foreach(var exPhoto in exPhotos)
+                    {
+                        System.IO.File.Delete(exPhoto.Src);
+                        dbContext.deleteProductPhoto(exPhoto.Id);
+                    }
+                }
+                foreach(var photo in model.Photo)
+                {
+                    var fileName = Path.GetFileName(photo.FileName);
+                    var path = "/Public/Products/" + model.Model;
+                    var photoUrl = Server.MapPath(path);
+                    var photoTitle = Path.GetFileNameWithoutExtension(photo.FileName);
+                    var uniqName = Guid.NewGuid().ToString() + "_" + fileName;
+
+                    if (!Directory.Exists(photoUrl))
+                    {
+                        Directory.CreateDirectory(photoUrl);
+                    }
+
+                    var photoPath = Path.Combine(photoUrl, uniqName);
+                    ProductPhoto newPhoto = new ProductPhoto
+                    {
+                        Path = path,
+                        Src = photoPath,
+                        Title = uniqName,
+                    };
+                    Photos.Add(newPhoto);
+
+                    photo.SaveAs(photoPath);
+                }
+
+                dbContext.addProductPhoto(Photos);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+        /*Failed*/
     }
 }

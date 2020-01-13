@@ -13,7 +13,7 @@ namespace E_CommerceAssignment.ViewModels
         public List<BrandModels> Brands { get; set; }
         public List<CategoryModels> Categories { get; set; }
         public List<ModelModels> Models { get; set; }
-        [DisplayName("+")]
+        [DataType(DataType.Upload)]
         public List<HttpPostedFileBase> Photo { get; set; }
     }
 }

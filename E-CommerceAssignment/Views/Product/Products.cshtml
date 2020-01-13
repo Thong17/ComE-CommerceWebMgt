@@ -4,45 +4,49 @@
     ViewBag.Title = "Products";
 }
 
-<h2>Products</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<h2>@Model.Name</h2>
-<h5>@Model.Brand</h5>
-<h5>@Model.Category</h5>
-<table class="table">
-    @foreach (var product in Model.Products)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Storage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Processor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Memory)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Display)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Details)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Color)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditProduct", new { id = product.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = product.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = product.Id })
-                </td>
-            </tr>
-        }
+    <div class="container" style="display: block">
+        <h2>Products</h2>
 
-</table>
+        <p>
+            @Html.ActionLink("Create New", "AddProduct", new { id = ViewBag.ModelId }, new { @class = "btn btn-primary" })
+        </p>
+        <h2>@Model.Name</h2>
+        <h5>@Model.Brand</h5>
+        <h5>@Model.Category</h5>
+        <table class="table">
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Storage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Processor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Memory)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Display)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Color)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditProduct", new { id = product.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = product.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = product.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
