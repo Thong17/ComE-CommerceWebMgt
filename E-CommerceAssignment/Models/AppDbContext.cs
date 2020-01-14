@@ -643,6 +643,25 @@ namespace E_CommerceAssignment.Models
                 cmd.ExecuteNonQuery();
             }
         }
+        
+        public void deleteProduct(int id)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("deleteProduct", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = id;
+                cmd.Parameters.Add(paramId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
 
     }
 }

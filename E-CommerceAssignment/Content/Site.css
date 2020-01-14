@@ -69,7 +69,7 @@ nav ul {
 
     nav ul li {
         list-style-type: none;
-        margin-bottom: -15px;
+        margin-bottom: -15px !important;
     }
 
         nav ul li a {
@@ -83,16 +83,39 @@ nav ul {
             }
 .dropdown-menu {
     width: 200px;
-    left: 50%;
+    left: 50% !important;
     height: 200px;
     right: auto;
     text-align: center;
     transform: translate(-50%, 0);
+
+}
+.avatar {
+    vertical-align: middle;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50%;
 }
 .dropdown-menu li {
-    padding: 10px 0;
+    padding: 0px !important;
+    line-height: 0 !important;
+    margin: 20px;
+    text-align: center;
+    
 }
-
+    .dropdown-menu li a {
+        color: #333;
+        font-size: 14px;
+        text-decoration: none !important;
+        text-align: right !important;
+    }
+.drop-header {
+    text-align: left !important;
+}
+.drop-body {
+    height: 10px;
+    display: block;
+}
 .divider {
     padding: 0 !important;
     height: 1px !important;
@@ -319,6 +342,7 @@ hr.style-six {
 .side-menu ul {
     display: flex;
     flex-direction: column;
+    margin: 0 !important;
     padding: 20px 0;
 }
 
@@ -464,7 +488,7 @@ hr.style-six {
     align-items: center;
     flex-direction: column;
     text-align: center;
-    z-index: 100 !important;
+    z-index: 10 !important;
     width: 100%;
     height: 30%;
 }
@@ -809,3 +833,56 @@ hr.style-six {
     .inputfile + label:hover {
         background-color: red;
     }
+
+
+
+/*Loading Animation*/
+.loading {
+    width: 100%;
+    height: 100vh;
+    background-color: hsla(0, 0%, 100%, 0.384);
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+}
+
+    .loading span {
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        background-color: #111;
+        border-radius: 50%;
+        margin: 0 3px;
+        animation: loading 1.5s infinite ease-in-out;
+    }
+
+        .loading span:first-child {
+            animation-delay: 0.4s;
+        }
+
+        .loading span:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        .loading span:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+@keyframes loading {
+    25% {
+        transform: scale(0.5);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(0.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

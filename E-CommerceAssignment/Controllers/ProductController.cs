@@ -380,6 +380,27 @@ namespace E_CommerceAssignment.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditModel(int id)
+        {
+            AppDbContext dbContext = new AppDbContext();
+            ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == id);
+            BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == model.BrandId);
+            CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == model.CategoryId);
+
+            EditModelViewModels viewModels = new EditModelViewModels
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Brand = brand.Brand,
+                BrandId = brand.BrandId,
+                Category = category.Category,
+                CategoryId = category.CategoryId
+            };
+
+            return View(viewModels);
+        }
+
+        [HttpGet]
         public ActionResult EditProduct(int id)
         {
             AppDbContext dbContext = new AppDbContext();
@@ -586,6 +607,27 @@ namespace E_CommerceAssignment.Controllers
                 CategoryId = category.CategoryId
             };
             return PartialView("_AddProducts", addProductView);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProduct(int id)
+        {
+            AppDbContext dbContext = new AppDbContext();
+            List<ProductPhoto> photos = dbContext.getProductPhotos(id).ToList();
+
+            if(photos.Count > 0)
+            {
+                foreach(var photo in photos)
+                {
+                    System.IO.File.Delete(photo.Src);
+                    dbContext.deleteProductPhoto(photo.Id);
+                }
+            }
+            ProductModels product = dbContext.getProducts.SingleOrDefault(p => p.Id == id);
+
+            dbContext.deleteProduct(id);
+
+            return RedirectToAction("Index");
         }
     }
 }

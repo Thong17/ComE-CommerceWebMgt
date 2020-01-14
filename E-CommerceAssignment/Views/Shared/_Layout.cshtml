@@ -52,10 +52,7 @@
                             <img src="~/Icons/profile.svg" alt="" srcset="">
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">HTML</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
+                            @Html.Partial("_LoginPartial")
                         </ul>
                     </div>
                     <a href="" class="activity-item">
@@ -66,6 +63,12 @@
             <div class="split-section">
                 @RenderBody()
             </div>
+
+            <div class="loading">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </main>
     </header>
     <footer>
@@ -73,5 +76,11 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     @Scripts.Render("~/bundles/custome")
     @RenderSection("scripts", required: false)
+    <script>
+        $(window).on("load", function () {
+            $(".loader-wrapper").fadeOut("slow");
+        });
+    </script>
+
 </body>
 </html>

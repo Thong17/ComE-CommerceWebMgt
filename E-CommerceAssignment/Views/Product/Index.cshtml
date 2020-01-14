@@ -29,6 +29,7 @@
             <br />
         </div>
         <div class="side-menu">
+            <hr class="style-six" />
             <h3>Product Brand</h3>
             <ul>
                 @for (var i = 0; i < Model.Brands.Count; i++)
@@ -42,8 +43,8 @@
                 }
             </ul>
             <div class="action-links">
-                @Html.ActionLink("Add Brand", "AddBrand", "Product", null, new { @class = "action-link-item" })
-                @Html.ActionLink("Add Category", "AddCategory", "Product", null, new { @class = "action-link-item" })
+                @Html.ActionLink("Brands", "Brands", "Product", null, new { @class = "action-link-item" })
+                @Html.ActionLink("Categories", "Categories", "Product", null, new { @class = "action-link-item" })
             </div>
 
             <hr class="style-six">

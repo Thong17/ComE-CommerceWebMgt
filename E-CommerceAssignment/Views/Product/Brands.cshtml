@@ -3,11 +3,11 @@
 @{
     ViewBag.Title = "Brands";
 }
-    <div class="container">
+    <div class="container" style="display: block;">
         <h2>Brands</h2>
 
         <p>
-            @Html.ActionLink("Create New", "AddBrand")
+            @Html.ActionLink("Create New", "AddBrand", null, new { @class = "btn btn-default" })
         </p>
         <table class="table">
             <tr>
@@ -17,7 +17,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.BrandDetails)
                 </th>
-                <th></th>
+                <th>Actions</th>
             </tr>
 
             @foreach (var item in Model)

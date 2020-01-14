@@ -10,40 +10,56 @@
     <h2>@Model.Name</h2>
 
     <p>
-        <button class="btn btn-primary" id="modal">Create New</button>
+        <button class="btn btn-default" id="modal">Create New</button>
         @*@Html.ActionLink("Create New", "AddProduct", new { id = ViewBag.ModelId }, new { @class = "btn btn-primary" })*@
     </p>
     <table class="table">
+        <tr>
+            <th>Price</th>
+            <th>Color</th>
+            <th>Storage</th>
+            <th>Processor</th>
+            <th>Memory</th>
+            <th>Display</th>
+            <th>Details</th>
+            <th>Actions</th>
+        </tr>
         @foreach (var product in Model.Products)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Storage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Processor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Memory)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Display)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Details)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => product.Color)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditProduct", new { id = product.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Details", "Details", new { id = product.Id }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Delete", "Delete", new { id = product.Id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
+
+            using (Html.BeginForm("DeleteProduct", "Product", new { id = product.Id }))
+            {
+                <tr>
+                    <td>
+                        $@Html.DisplayFor(modelItem => product.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Storage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Processor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Memory)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Display)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.Details)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = product.Id }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Edit", "EditProduct", new { id = product.Id }, new { @class = "btn btn-primary" })
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure you want to delete product with Id = @product.Id?')" />
+
+                    </td>
+                </tr>
+            }
         }
 
     </table>

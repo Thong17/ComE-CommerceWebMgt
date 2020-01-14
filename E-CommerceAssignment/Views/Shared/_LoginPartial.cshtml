@@ -1,22 +1,31 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-        <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <li class="drop-header" style="margin: 8px !important">
+            <img class="avatar" src="~/Icons/avatar.png" />
+            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @style = "margin-left: 10px;"})
+
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <li class="divider"></li>
+
+        <li class="drop-body">
+            <a href="#">About</a>
+        </li>
+        <li class="drop-body">
+            <a href="#">Setting</a>
+        </li>
+        <li class="divider"></li>
+        <li class="drop-footer"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+
     }
 }
 else
 {
-    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
 }
