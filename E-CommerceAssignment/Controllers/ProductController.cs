@@ -207,6 +207,7 @@ namespace E_CommerceAssignment.Controllers
 
         public ActionResult Products(int id)
         {
+            ViewBag.ModelId = id;
             AppDbContext dbContext = new AppDbContext();
             List<ProductModels> products = dbContext.getProductModels(id).ToList();
             
@@ -244,13 +245,14 @@ namespace E_CommerceAssignment.Controllers
                     productView.Category = category.Category;
                     productView.Products = products;
 
-                    ViewBag.ModelId = id;
+                    
 
                 }
                 return View(productView);
             }
-
-            return View("Error");
+            
+            ViewBag.Result = "No product created";
+            return View();
         }
 
         [HttpPost]
@@ -585,9 +587,8 @@ namespace E_CommerceAssignment.Controllers
 
             return View(model);
         }
-        /*Failed*/
+        /*Pendding*/
         
-
         /*Adding multiple product*/
         public PartialViewResult AddProducts(int id)
         {
@@ -623,11 +624,75 @@ namespace E_CommerceAssignment.Controllers
                     dbContext.deleteProductPhoto(photo.Id);
                 }
             }
-            ProductModels product = dbContext.getProducts.SingleOrDefault(p => p.Id == id);
 
             dbContext.deleteProduct(id);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteModel(int id)
+        {
+            AppDbContext dbContext = new AppDbContext();
+
+            List<ProductModels> products = dbContext.getProductModels(id).ToList();
+            if(products.Count > 0)
+            {
+                foreach(var product in products)
+                {
+                    List<ProductPhoto> photos = dbContext.getProductPhotos(product.Id).ToList();
+                    if(photos.Count > 0)
+                    {
+                        foreach(var photo in photos)
+                        {
+                            System.IO.File.Delete(photo.Src);
+                            dbContext.deleteProductPhoto(photo.Id);
+                        }
+                    }
+
+                    dbContext.deleteProduct(product.Id);
+                }
+            }
+            dbContext.deleteModel(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteBrand(int id)
+        {
+            AppDbContext dbContext = new AppDbContext();
+
+            List<ModelModels> models = dbContext.getModelBrands(id).ToList();
+
+            if(models.Count > 0)
+            {
+                foreach(var model in models)
+                {
+                    List<ProductModels> products = dbContext.getProductModels(model.Id).ToList();
+
+                    if(products.Count > 0)
+                    {
+                        foreach(var product in products)
+                        {
+                            List<ProductPhoto> photos = dbContext.getProductPhotos(product.Id).ToList();
+
+                            if(photos.Count > 0)
+                            {
+                                foreach(var photo in photos)
+                                {
+                                    System.IO.File.Delete(photo.Src);
+                                    dbContext.deleteProductPhoto(photo.Id);
+                                }
+                            }
+                            dbContext.deleteProduct(product.Id);
+                        }
+                    }
+                    dbContext.deleteModel(model.Id);
+                }
+            }
+            dbContext.deleteBrand(id);
+            return RedirectToAction("Brands");
         }
     }
 }

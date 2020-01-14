@@ -663,5 +663,61 @@ namespace E_CommerceAssignment.Models
             }
         }
 
+        public void deleteModel(int id)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("deleteModel", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = id;
+                cmd.Parameters.Add(paramId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void deleteBrand(int id)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("deleteBrand", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = id;
+                cmd.Parameters.Add(paramId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void deleteCategory(int id)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("deleteCategory", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = id;
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
     }
 }
