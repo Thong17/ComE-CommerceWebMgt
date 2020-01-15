@@ -67,6 +67,47 @@ namespace E_CommerceAssignment.Controllers
         }
 
         [HttpGet]
+        public ActionResult Search(string search)
+        {
+            AppDbContext dbContext = new AppDbContext();
+
+            List<ProductModels> products = dbContext.getProducts.ToList();
+
+            List<GetProductViewModel> searchProducts = new List<GetProductViewModel>();
+
+            foreach(var item in products)
+            {
+                ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == item.ModelId);
+                BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == model.BrandId);
+                CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == model.CategoryId);
+                List<ProductPhoto> photos = dbContext.getProductPhotos(item.Id).ToList();
+
+                GetProductViewModel searchProduct = new GetProductViewModel 
+                {
+                    Id = item.Id,
+                    Name = model.Name,
+                    Brand = brand.Brand,
+                    Category = category.Category,
+                    Color = item.Color,
+                    Price = item.Price,
+                    Processor = item.Processor,
+                    Memory = item.Memory,
+                    Storage = item.Storage,
+                    Display = item.Display,
+                    Details = item.Details,
+                    Photos = photos
+                };
+
+                searchProducts.Add(searchProduct);
+
+            }
+            var result = searchProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).ToList();
+
+
+            return View(result);
+        }
+
+        [HttpGet]
         public ActionResult AddBrand()
         {
             return View();

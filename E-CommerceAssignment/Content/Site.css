@@ -7,6 +7,10 @@ html, body {
     height: 100%;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 header {
     min-height: 100%;
     padding-bottom: 70px;
@@ -84,7 +88,6 @@ nav ul {
 .dropdown-menu {
     width: 200px;
     left: 50% !important;
-    height: 200px;
     right: auto;
     text-align: center;
     transform: translate(-50%, 0);
@@ -99,9 +102,9 @@ nav ul {
 .dropdown-menu li {
     padding: 0px !important;
     line-height: 0 !important;
-    margin: 20px;
+    margin: 1px 0 10px 0 !important;
     text-align: center;
-    
+    position: relative;
 }
     .dropdown-menu li a {
         color: #333;
@@ -113,14 +116,16 @@ nav ul {
     text-align: left !important;
 }
 .drop-body {
-    height: 10px;
+    height: 20px !important;
     display: block;
 }
 .divider {
     padding: 0 !important;
     height: 1px !important;
 }
-
+.drop-footer {
+    height: 10px !important;
+}
 .activity {
     width: 120px;
     display: flex;
@@ -160,6 +165,7 @@ nav ul {
     padding: 30px 150px;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
 }
 .search-bar {
     display: flex;
@@ -198,6 +204,7 @@ nav ul {
 
 #search-result {
     width: 70%;
+    background-color: aquamarine;
 }
 
 .close-search {
@@ -459,13 +466,13 @@ hr.style-six {
     justify-content: center;
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
-    transition: 1s ease-in-out;
+    transition: 0.5s ease-in-out;
     text-decoration: none !important;
     overflow: hidden;
 }
 
     .item:hover, .item:focus {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 /* Item image */
 #slider {
@@ -531,7 +538,7 @@ hr.style-six {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 30%;
+    width: 10%;
     margin: 40px auto 0 auto;
 }
 
@@ -578,7 +585,10 @@ hr.style-six {
     cursor: pointer;
 }
 
-
+.inputImg {
+    border: none !important;
+    margin-top: 20px;
+}
 
 @media only screen and (max-width: 1182px) {
     nav {
@@ -697,7 +707,7 @@ hr.style-six {
     }
 
         .item:hover, .item:focus {
-            transform: scale(1.1);
+            transform: scale(1);
         }
     /* Item image */
     .item-img {

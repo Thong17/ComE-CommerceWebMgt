@@ -193,6 +193,7 @@
     <Compile Include="ViewModels\GetProductViewModel.cs" />
     <Compile Include="ViewModels\ListProductViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\SearchProductsViewModels.cs" />
     <Compile Include="ViewModels\UpdatePhotoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +288,7 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Product\_AddProducts.cshtml" />
     <Content Include="Views\Product\EditModel.cshtml" />
+    <Content Include="Views\Product\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
