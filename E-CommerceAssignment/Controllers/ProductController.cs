@@ -194,7 +194,7 @@ namespace E_CommerceAssignment.Controllers
                 AppDbContext dbContext = new AppDbContext();
                 ModelModels model = new ModelModels
                 {
-                    Name = models.Name,
+                    Name = models.Name.Trim(),
                     BrandId = models.BrandId,
                     CategoryId = models.CategoryId,
                     CreatedBy = User.Identity.Name,
@@ -203,7 +203,7 @@ namespace E_CommerceAssignment.Controllers
 
                 dbContext.addModel(model);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", model.BrandId);
             }
             return View();
         }

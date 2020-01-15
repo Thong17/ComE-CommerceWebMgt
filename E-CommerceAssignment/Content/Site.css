@@ -31,7 +31,7 @@ footer {
     color: #111;
     font-size: 28px;
     font-weight: 400;
-    margin-bottom: -8px
+    margin-bottom: -1px
 }
 
 nav {
@@ -89,7 +89,7 @@ nav ul {
     width: 200px;
     left: 50% !important;
     right: auto;
-    text-align: center;
+    text-align: left !important;
     transform: translate(-50%, 0);
 
 }
@@ -102,7 +102,7 @@ nav ul {
 .dropdown-menu li {
     padding: 0px !important;
     line-height: 0 !important;
-    margin: 1px 0 10px 0 !important;
+    margin: 1px 0 10px 10px !important;
     text-align: center;
     position: relative;
 }
@@ -117,6 +117,7 @@ nav ul {
 }
 .drop-body {
     height: 20px !important;
+    text-align: left !important;
     display: block;
 }
 .divider {
@@ -473,6 +474,7 @@ hr.style-six {
 
     .item:hover, .item:focus {
         transform: scale(1.05);
+        border: 1px solid #777;
     }
 /* Item image */
 #slider {
