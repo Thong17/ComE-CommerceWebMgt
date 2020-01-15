@@ -278,12 +278,13 @@ namespace E_CommerceAssignment.Controllers
 
                 dbContext.addProduct(productModels);
 
+                ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == product.ModelId);
 
                 productModels.Photos = new List<ProductPhoto>();
                 foreach(var item in Photo)
                 {
                     var fileName = Path.GetFileName(item.FileName);
-                    var path = "/Public/Products/" + product.Model;
+                    var path = "/Public/Products/" + model.Name;
                     var photoUrl = Server.MapPath(path);
                     var photoTitle = Path.GetFileNameWithoutExtension(item.FileName);
                     var uniqName = Guid.NewGuid().ToString() + "_" + fileName;
@@ -385,21 +386,38 @@ namespace E_CommerceAssignment.Controllers
         public ActionResult EditModel(int id)
         {
             AppDbContext dbContext = new AppDbContext();
+            List<BrandModels> brands = dbContext.getBrands.ToList();
+            List<CategoryModels> categories = dbContext.getCategories.ToList();
             ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == id);
-            BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == model.BrandId);
-            CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == model.CategoryId);
 
-            EditModelViewModels viewModels = new EditModelViewModels
+            EditModelViewModels viewModels = new EditModelViewModels();
+            viewModels.Id = id;
+            viewModels.Name = model.Name;
+            viewModels.BrandId = model.BrandId;
+            viewModels.Brands = brands;
+            viewModels.CategoryId = model.CategoryId;
+            viewModels.Categories = categories;
+            return View(viewModels);
+        }
+
+        [HttpPost]
+        public ActionResult EditModel(EditModelViewModels viewModels)
+        {
+            AppDbContext dbContext = new AppDbContext();
+
+            ModelModels model = new ModelModels
             {
-                Id = model.Id,
-                Name = model.Name,
-                Brand = brand.Brand,
-                BrandId = brand.BrandId,
-                Category = category.Category,
-                CategoryId = category.CategoryId
+                Id = viewModels.Id,
+                Name = viewModels.Name,
+                CategoryId = viewModels.CategoryId,
+                BrandId = viewModels.BrandId,
+                CreatedBy = User.Identity.Name,
+                CreatedDate = DateTime.Now,
             };
 
-            return View(viewModels);
+            dbContext.updateModel(model);
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

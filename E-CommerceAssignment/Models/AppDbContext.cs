@@ -529,6 +529,40 @@ namespace E_CommerceAssignment.Models
             }
         }
 
+        public void updateModel(ModelModels model)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("updateModel", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = model.Id;
+                cmd.Parameters.Add(paramId);
+
+                SqlParameter paramName = new SqlParameter();
+                paramName.ParameterName = "@Name";
+                paramName.Value = model.Name;
+                cmd.Parameters.Add(paramName);
+
+                SqlParameter paramBrandId = new SqlParameter();
+                paramBrandId.ParameterName = "@BrandId";
+                paramBrandId.Value = model.BrandId;
+                cmd.Parameters.Add(paramBrandId);
+
+                SqlParameter paramCategoryId = new SqlParameter();
+                paramCategoryId.ParameterName = "@CategoryId";
+                paramCategoryId.Value = model.CategoryId;
+                cmd.Parameters.Add(paramCategoryId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public void updateProduct(ProductModels product)
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;

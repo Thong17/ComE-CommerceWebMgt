@@ -9,28 +9,28 @@
         </div>
         <div class="modal-body">
             @*Customer Details*@
-            <div class="form-horizontal">
-                <input type="hidden" id="CustomerId" />
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
-                    </div>
-                    @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
 
-            @*Order Details*@
-            <hr />
             @using (Html.BeginForm("AddProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <input type="hidden" id="CustomerId" />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
 
+                @*Order Details*@
+                <hr />
                 <div class="form-horizontal">
                     <h4>Product Details</h4>
                     <hr />
@@ -93,19 +93,19 @@
                     </div>
 
                     @*<table id="detailsTable" class="table">
-                        <thead>
-                            <tr>
-                                <th style="width:15%">Price</th>
-                                <th style="width:15%">Color</th>
-                                <th style="width:20%">Storage</th>
-                                <th style="width:15%">Memory</th>
-                                <th style="width:25%">Processor</th>
-                                <th style="width:50%">Display</th>
-                                <th style="width:10%"></th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>*@
+                    <thead>
+                        <tr>
+                            <th style="width:15%">Price</th>
+                            <th style="width:15%">Color</th>
+                            <th style="width:20%">Storage</th>
+                            <th style="width:15%">Memory</th>
+                            <th style="width:25%">Processor</th>
+                            <th style="width:50%">Display</th>
+                            <th style="width:10%"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>*@
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-default" data-dismiss="modal">Close</button>
