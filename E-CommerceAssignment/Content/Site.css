@@ -170,8 +170,12 @@ nav ul {
 .search-bar-show {
     transform: translateY(0);
 }
-
-.search-bar input {
+.search-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.inp-search {
     width: 50%;
     font-size: 18px;
     font-weight: 300;
@@ -180,12 +184,14 @@ nav ul {
     font-family: 'Open Sans', sans-serif;
     background: none;
 }
-    .search-bar input:focus {
+    .inp-search:focus {
         border-bottom: 0.07px solid #777;
     }
 
-.search-bar a {
+#btn-search {
     width: 32px;
+    background: none;
+    border: none;
     height: 32px;
     text-decoration: none;
 }

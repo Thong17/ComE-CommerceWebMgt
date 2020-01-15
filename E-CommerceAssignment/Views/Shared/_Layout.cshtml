@@ -21,10 +21,14 @@
                         <div class="span1"></div>
                         <div class="span2"></div>
                     </div>
-                    <input type="text" name="" id="" placeholder="Search...">
-                    <a href="">
-                        <img src="~/Icons/search.svg" alt="" srcset="">
-                    </a>
+                    @using (Html.BeginForm("Index", "Product", FormMethod.Get, new { @class = "search-form" }))
+                    {
+                        @Html.TextBox("search", null, new { @class = "inp-search", placeholder = "Search..." })
+                        <button type="submit" id="btn-search">
+                            <img src="~/Icons/search.svg" alt="" srcset="">
+                        </button>
+                    }
+
                 </div>
                 <br />
                 <div id="search-result">
@@ -64,11 +68,11 @@
                 @RenderBody()
             </div>
 
-            <div class="loading">
+            @*<div class="loading">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </div>*@
         </main>
     </header>
     <footer>
