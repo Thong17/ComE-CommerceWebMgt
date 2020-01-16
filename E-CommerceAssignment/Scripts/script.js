@@ -23,7 +23,7 @@ $(document).ready(function () {
 var pmdSliderValueRange = document.getElementById('pmd-slider-value-range');
 
 noUiSlider.create(pmdSliderValueRange, {
-    start: [1000, 3000], // Handle start position
+    start: [700, 2700], // Handle start position
     connect: true, // Display a colored bar between the handles
     tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
     format: wNumb({

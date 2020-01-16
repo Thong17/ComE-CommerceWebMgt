@@ -6,13 +6,14 @@ using System.Linq;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace E_CommerceAssignment.Controllers
 {
     [Authorize]
     public class ProductController : Controller
     {
-        public ActionResult Index(string search)
+        public ActionResult Index(string search, int? page)
         {
             AppDbContext dbContext = new AppDbContext();
             ListProductViewModel listProduct = new ListProductViewModel();
@@ -49,9 +50,10 @@ namespace E_CommerceAssignment.Controllers
                 getProducts.Add(getProduct);
             }
 
-            /*Search product*/
-            listProduct.Products = getProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).ToList();
-            
+            /*Search product and sort by date*/
+            listProduct.Products = getProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).OrderByDescending(p => p.CreatedDate).ToList().ToPagedList(page ?? 1, 20);
+
+
             /*Get the number of each product in a brand*/
             listProduct.EachProductsOfBrands = new List<int>();
             foreach(var brand in listProduct.Brands)
