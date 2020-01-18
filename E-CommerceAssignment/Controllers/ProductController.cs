@@ -69,7 +69,7 @@ namespace E_CommerceAssignment.Controllers
         }
 
         [HttpGet]
-        public ActionResult Search(string search)
+        public ActionResult Search(string search, int? page)
         {
             AppDbContext dbContext = new AppDbContext();
 
@@ -77,7 +77,8 @@ namespace E_CommerceAssignment.Controllers
 
             List<GetProductViewModel> searchProducts = new List<GetProductViewModel>();
 
-            foreach(var item in products)
+
+            foreach (var item in products)
             {
                 ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == item.ModelId);
                 BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == model.BrandId);
@@ -103,8 +104,7 @@ namespace E_CommerceAssignment.Controllers
                 searchProducts.Add(searchProduct);
 
             }
-            var result = searchProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).ToList();
-
+            var result = searchProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).ToList().ToPagedList(page ?? 1, 20);
 
             return View(result);
         }
@@ -505,6 +505,36 @@ namespace E_CommerceAssignment.Controllers
             if (ModelState.IsValid)
             {
                 AppDbContext dbContext = new AppDbContext();
+
+                ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == product.ModelId);
+
+                ProductModels oldProduct = dbContext.getProducts.SingleOrDefault(p => p.Id == product.Id);
+
+                BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == model.BrandId);
+
+                CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == model.CategoryId);
+
+                EditProductModels editProduct = new EditProductModels
+                {
+                    Id = Guid.NewGuid(),
+                    Model = model.Name,
+                    Brand = brand.Brand,
+                    Category = category.Category,
+                    Price = oldProduct.Price,
+                    Color = oldProduct.Color,
+                    Storage = oldProduct.Storage,
+                    Processor = oldProduct.Processor,
+                    Memory = oldProduct.Memory,
+                    Display = oldProduct.Display,
+                    Details = oldProduct.Details,
+                    EditedBy = User.Identity.Name,
+                    EditedDate = DateTime.Now,
+                    ProductId = product.Id
+                };
+
+                dbContext.addEditedProduct(editProduct);
+
+
                 ProductModels productModels = new ProductModels();
                 productModels.Id = product.Id;
                 productModels.Price = product.Price;
@@ -518,7 +548,7 @@ namespace E_CommerceAssignment.Controllers
 
                 productModels.Photos = new List<ProductPhoto>();
                 
-                ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == product.ModelId);
+                
 
                 List<ProductPhoto> photos = new List<ProductPhoto>();
 
@@ -675,6 +705,31 @@ namespace E_CommerceAssignment.Controllers
         public ActionResult DeleteProduct(int id)
         {
             AppDbContext dbContext = new AppDbContext();
+            ProductModels product = dbContext.getProducts.SingleOrDefault(p => p.Id == id);
+            ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == product.ModelId);
+            BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == model.BrandId);
+            CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == model.CategoryId);
+
+            EditProductModels toBeDeleted = new EditProductModels
+            {
+                Id = Guid.NewGuid(),
+                Model = model.Name,
+                Brand = brand.Brand,
+                Category = category.Category,
+                Price = product.Price,
+                Color = product.Color,
+                Storage = product.Storage,
+                Processor = product.Processor,
+                Memory = product.Memory,
+                Display = product.Display,
+                Details = product.Details,
+                EditedBy = User.Identity.Name,
+                EditedDate = DateTime.Now,
+                ProductId = product.Id
+            };
+
+            dbContext.addDeletedProduct(toBeDeleted);
+
             List<ProductPhoto> photos = dbContext.getProductPhotos(id).ToList();
 
             if(photos.Count > 0)
@@ -755,5 +810,6 @@ namespace E_CommerceAssignment.Controllers
             dbContext.deleteBrand(id);
             return RedirectToAction("Brands");
         }
+
     }
 }

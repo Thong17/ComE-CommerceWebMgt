@@ -753,5 +753,212 @@ namespace E_CommerceAssignment.Models
             }
         }
 
+        public void addEditedProduct(EditProductModels editedProduct)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using(SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("addEditedProduct", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = editedProduct.Id;
+                cmd.Parameters.Add(paramId);
+
+                SqlParameter paramModel = new SqlParameter();
+                paramModel.ParameterName = "@Model";
+                paramModel.Value = editedProduct.Model;
+                cmd.Parameters.Add(paramModel);
+
+                SqlParameter paramCategory = new SqlParameter();
+                paramCategory.ParameterName = "@Category";
+                paramCategory.Value = editedProduct.Category;
+                cmd.Parameters.Add(paramCategory);
+
+                SqlParameter paramBrand = new SqlParameter();
+                paramBrand.ParameterName = "@Brand";
+                paramBrand.Value = editedProduct.Brand;
+                cmd.Parameters.Add(paramBrand);
+
+                SqlParameter paramPrice = new SqlParameter();
+                paramPrice.ParameterName = "@Price";
+                paramPrice.Value = editedProduct.Price;
+                cmd.Parameters.Add(paramPrice);
+
+                SqlParameter paramColor = new SqlParameter();
+                paramColor.ParameterName = "@Color";
+                paramColor.Value = editedProduct.Color;
+                cmd.Parameters.Add(paramColor);
+
+                SqlParameter paramStorage = new SqlParameter();
+                paramStorage.ParameterName = "@Storage";
+                paramStorage.Value = editedProduct.Storage;
+                cmd.Parameters.Add(paramStorage);
+
+                SqlParameter paramProcessor = new SqlParameter();
+                paramProcessor.ParameterName = "@Processor";
+                paramProcessor.Value = editedProduct.Processor;
+                cmd.Parameters.Add(paramProcessor);
+
+                SqlParameter paramMemory = new SqlParameter();
+                paramMemory.ParameterName = "@Memory";
+                paramMemory.Value = editedProduct.Memory;
+                cmd.Parameters.Add(paramMemory);
+
+                SqlParameter paramDisplay = new SqlParameter();
+                paramDisplay.ParameterName = "@Display";
+                paramDisplay.Value = editedProduct.Display;
+                cmd.Parameters.Add(paramDisplay);
+
+                SqlParameter paramDetails = new SqlParameter();
+                paramDetails.ParameterName = "@Details";
+                paramDetails.Value = editedProduct.Details;
+                cmd.Parameters.Add(paramDetails);
+
+                SqlParameter paramEditedBy = new SqlParameter();
+                paramEditedBy.ParameterName = "@EditedBy";
+                paramEditedBy.Value = editedProduct.EditedBy;
+                cmd.Parameters.Add(paramEditedBy);
+
+                SqlParameter paramEditedDate = new SqlParameter();
+                paramEditedDate.ParameterName = "@EditedDate";
+                paramEditedDate.Value = editedProduct.EditedDate;
+                cmd.Parameters.Add(paramEditedDate);
+
+                SqlParameter paramProductId = new SqlParameter();
+                paramProductId.ParameterName = "@ProductId";
+                paramProductId.Value = editedProduct.ProductId;
+                cmd.Parameters.Add(paramProductId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public List<EditProductModels> getEditedProducts
+        {
+            get
+            {
+                string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+                List<EditProductModels> productModels = new List<EditProductModels>();
+
+                using (SqlConnection con = new SqlConnection(cs))
+                {
+                   
+                    SqlCommand cmd = new SqlCommand("getEditedProduct", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        EditProductModels editProduct = new EditProductModels();
+                        editProduct.Id = Guid.Parse(reader["Id"].ToString());
+                        editProduct.Model = reader["Model"].ToString();
+                        editProduct.Brand = reader["Brand"].ToString();
+                        editProduct.Category = reader["Category"].ToString();
+                        editProduct.Price = Convert.ToDouble(reader["Price"]);
+                        editProduct.Color = reader["Color"].ToString();
+                        editProduct.Storage = reader["Storage"].ToString();
+                        editProduct.Processor = reader["Processor"].ToString();
+                        editProduct.Memory = reader["Memory"].ToString();
+                        editProduct.Display = reader["Display"].ToString();
+                        editProduct.Details = reader["Details"].ToString();
+                        editProduct.EditedBy = reader["EditedBy"].ToString();
+                        editProduct.EditedDate = Convert.ToDateTime(reader["EditedDate"]);
+                        editProduct.ProductId = Convert.ToInt32(reader["ProductId"]);
+
+                        productModels.Add(editProduct);
+                    }
+                }
+                return productModels;
+            }
+        }
+
+        public void addDeletedProduct(EditProductModels editedProduct)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("addDeletedProduct", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramId = new SqlParameter();
+                paramId.ParameterName = "@Id";
+                paramId.Value = editedProduct.Id;
+                cmd.Parameters.Add(paramId);
+
+                SqlParameter paramModel = new SqlParameter();
+                paramModel.ParameterName = "@Model";
+                paramModel.Value = editedProduct.Model;
+                cmd.Parameters.Add(paramModel);
+
+                SqlParameter paramCategory = new SqlParameter();
+                paramCategory.ParameterName = "@Category";
+                paramCategory.Value = editedProduct.Category;
+                cmd.Parameters.Add(paramCategory);
+
+                SqlParameter paramBrand = new SqlParameter();
+                paramBrand.ParameterName = "@Brand";
+                paramBrand.Value = editedProduct.Brand;
+                cmd.Parameters.Add(paramBrand);
+
+                SqlParameter paramPrice = new SqlParameter();
+                paramPrice.ParameterName = "@Price";
+                paramPrice.Value = editedProduct.Price;
+                cmd.Parameters.Add(paramPrice);
+
+                SqlParameter paramColor = new SqlParameter();
+                paramColor.ParameterName = "@Color";
+                paramColor.Value = editedProduct.Color;
+                cmd.Parameters.Add(paramColor);
+
+                SqlParameter paramStorage = new SqlParameter();
+                paramStorage.ParameterName = "@Storage";
+                paramStorage.Value = editedProduct.Storage;
+                cmd.Parameters.Add(paramStorage);
+
+                SqlParameter paramProcessor = new SqlParameter();
+                paramProcessor.ParameterName = "@Processor";
+                paramProcessor.Value = editedProduct.Processor;
+                cmd.Parameters.Add(paramProcessor);
+
+                SqlParameter paramMemory = new SqlParameter();
+                paramMemory.ParameterName = "@Memory";
+                paramMemory.Value = editedProduct.Memory;
+                cmd.Parameters.Add(paramMemory);
+
+                SqlParameter paramDisplay = new SqlParameter();
+                paramDisplay.ParameterName = "@Display";
+                paramDisplay.Value = editedProduct.Display;
+                cmd.Parameters.Add(paramDisplay);
+
+                SqlParameter paramDetails = new SqlParameter();
+                paramDetails.ParameterName = "@Details";
+                paramDetails.Value = editedProduct.Details;
+                cmd.Parameters.Add(paramDetails);
+
+                SqlParameter paramEditedBy = new SqlParameter();
+                paramEditedBy.ParameterName = "@EditedBy";
+                paramEditedBy.Value = editedProduct.EditedBy;
+                cmd.Parameters.Add(paramEditedBy);
+
+                SqlParameter paramEditedDate = new SqlParameter();
+                paramEditedDate.ParameterName = "@EditedDate";
+                paramEditedDate.Value = editedProduct.EditedDate;
+                cmd.Parameters.Add(paramEditedDate);
+
+                SqlParameter paramProductId = new SqlParameter();
+                paramProductId.ParameterName = "@ProductId";
+                paramProductId.Value = editedProduct.ProductId;
+                cmd.Parameters.Add(paramProductId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
     }
 }

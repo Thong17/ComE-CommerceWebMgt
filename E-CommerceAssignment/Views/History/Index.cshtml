@@ -1,0 +1,97 @@
+﻿@model IEnumerable<E_CommerceAssignment.Models.EditProductModels>
+
+
+    <div class="container" style="display: block;">
+        <h3>List of edited products</h3>
+        <br />
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Storage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Processor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Memory)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Display)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Details)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EditedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EditedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductId)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Storage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Processor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Memory)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Display)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EditedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EditedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+

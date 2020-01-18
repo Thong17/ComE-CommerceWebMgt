@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace E_CommerceAssignment.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

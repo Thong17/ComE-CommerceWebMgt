@@ -468,7 +468,6 @@ hr.style-six {
 
     .item:hover, .item:focus {
         transform: scale(1.05);
-        border: 1px solid #777;
     }
 /* Item image */
 #slider {

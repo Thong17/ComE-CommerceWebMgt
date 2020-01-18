@@ -1,69 +1,60 @@
-﻿@model IEnumerable<E_CommerceAssignment.ViewModels.GetProductViewModel>
+﻿@using PagedList
+@using PagedList.Mvc
 
-    <div class="container">
-        <div class="product-list">
-            <div class="product-list-header">
-                @if (Model.Count() == 1)
-                {
-                    <h3>@Model.Count() result found</h3>
-                }
-                else
-                {
-                    <h3>@Model.Count() results found</h3>
-                }
-                <div class="product-list-result">
-                    <div class="product-sort">
-                        <p>Sort by date</p>
-                        <div class="dropdown"></div>
-                    </div>
-                    <p>Showing result 1 - 15 of 25 results</p>
+@model IPagedList<E_CommerceAssignment.ViewModels.GetProductViewModel>
+
+<div class="container">
+    <div class="product-list">
+        <div class="product-list-header">
+            @if (Model.Count() == 1)
+            {
+                <h3>@Model.Count() result found</h3>
+            }
+            else
+            {
+                <h3>@Model.TotalItemCount products found</h3>
+            }
+            <div class="product-list-result">
+                <div class="product-sort">
+                    <p>Sort by date</p>
+                    <div class="dropdown"></div>
                 </div>
-            </div>
-
-            <div class="product-list-items">
-                @foreach (var item in Model)
-                {
-                    <a href="/Product/EditProduct/@item.Id" class="item">
-                        <div id="slider">
-                            @foreach (var photo in item.Photos)
-                            {
-                                <div class="item-img">
-                                    <img src="@photo.Path/@photo.Title" alt="@photo.Title" />
-                                </div>
-                            }
-                        </div>
-
-
-                        <div class="item-detail">
-                            <h5>@item.Name</h5>
-                            <h5>@item.Storage</h5>
-                            <div class="price">
-                                <p>$@item.Price</p>
-                                <p>$1799</p>
-                            </div>
-
-                        </div>
-                    </a>
-                }
-
-
-            </div>
-            <div class="action-btn">
-                <div class="prev">
-                    <img src="~/Icons/iconfinder_right_1303890.svg" alt="" srcset="">
-                </div>
-                <div class="pages">
-                    <div class="page-number">
-                        <a href="" class="active">1</a>
-                    </div>
-                    <div class="page-number">
-                        <a href="">2</a>
-                    </div>
-                </div>
-                <div class="next">
-                    <img src="~/Icons/iconfinder_right_1303890.svg" alt="" srcset="">
-                </div>
+                <p>Showing result 1 - @Model.Count() of @Model.TotalItemCount results</p>
             </div>
         </div>
+
+        <div class="product-list-items">
+            @foreach (var item in Model)
+            {
+                <a href="/Product/EditProduct/@item.Id" class="item">
+                    <div id="slider">
+                        @foreach (var photo in item.Photos)
+                        {
+                            <div class="item-img">
+                                <img src="@photo.Path/@photo.Title" alt="@photo.Title" />
+                            </div>
+                        }
+                    </div>
+
+
+                    <div class="item-detail">
+                        <h5>@item.Name</h5>
+                        <h5>@item.Storage</h5>
+                        <div class="price">
+                            <p>$@item.Price</p>
+                            <p>$1799</p>
+                        </div>
+
+                    </div>
+                </a>
+            }
+
+
+        </div>
+        <div class="action-btn">
+            @Html.PagedListPager(Model, page => Url.Action("Search", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
+        </div>
     </div>
+</div>
 
