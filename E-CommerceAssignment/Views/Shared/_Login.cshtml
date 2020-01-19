@@ -3,10 +3,18 @@
 <head>
     <title>E-Commerce Computer Management - Login</title>
     @RenderSection("head", required: false)
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
 </head>
 <body>
     @RenderBody()
+    <div class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <script src="~/Scripts/script.js"></script>
 </body>
 </html>

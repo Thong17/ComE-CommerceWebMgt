@@ -16,9 +16,11 @@ $(document).ready(function () {
     $('.close-search').on('click', function () {
         $('.search-container').removeClass('search-bar-show');
     });
-
 });
 
+$(window).on("load", function () {
+    $(".loading").delay(1000).fadeOut("slow");
+});
 // multiple handled with value 
 var pmdSliderValueRange = document.getElementById('pmd-slider-value-range');
 

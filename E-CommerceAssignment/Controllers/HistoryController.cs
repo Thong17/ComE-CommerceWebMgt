@@ -14,7 +14,7 @@ namespace E_CommerceAssignment.Controllers
         // GET: History
         public ActionResult Index()
         {
-            List<EditProductModels> products = dbContext.getEditedProducts.ToList();
+            List<EditProductModels> products = dbContext.getEditedProducts.OrderByDescending(p => p.EditedDate).ToList();
             return View(products);
         }
     }

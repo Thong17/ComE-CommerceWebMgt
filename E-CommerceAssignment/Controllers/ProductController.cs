@@ -104,7 +104,7 @@ namespace E_CommerceAssignment.Controllers
                 searchProducts.Add(searchProduct);
 
             }
-            var result = searchProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).ToList().ToPagedList(page ?? 1, 20);
+            var result = searchProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).ToList().ToPagedList(page ?? 1, 50);
 
             return View(result);
         }

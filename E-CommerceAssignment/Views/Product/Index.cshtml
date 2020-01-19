@@ -6,12 +6,41 @@
 @{
     ViewBag.Title = "Index";
 }
+@section scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#slider').owlCarousel({
+                loop: true,
+                nav: false,
+                autoplay: true,
+                dots: false,
+                smartSpeed: 1500,
+                autoplayTimeout: 5000,
+                items:1
+            })
+        })
+    </script>
+}
+@section head {
 
-<div class="slider">
-    <div class="sub-content">
-        <h1>Shop sidebar</h1>
-        <br>
-        <p>Home / Shop Sidebar</p>
+    <link href="~/Content/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/owl.theme.default.min.css" rel="stylesheet" />
+}
+
+<div class="slider owl-carousel owl-theme" id="slider">
+    <div class="items">
+        <img src="Public/Sliders/960x0.jpg" />
+    </div>
+    <div class="items">
+        <img src="Public/Sliders/surface-pro-x-1471x800-1570078613.jpg" />
+    </div>
+    <div class="items">
+        <img src="Public/Sliders/71TCixvQotL._AC_SY355_.jpg" />
+    </div>
+    <div class="items">
+        <img src="Public/Sliders/razer.png" />
     </div>
 </div>
 <div class="content">
@@ -65,7 +94,8 @@
                 <p>Showing result 1 - @Model.Products.Count() of @Model.Products.TotalItemCount</p>
             </div>
         </div>
-
+        <br />
+        <hr />
         <div class="product-list-items">
             @foreach (var item in Model.Products)
             {
@@ -97,24 +127,11 @@
 
         <div class="action-btn">
             @Html.PagedListPager(Model.Products, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
-
-            @*<div class="prev">
-                    <img src="~/Icons/iconfinder_right_1303890.svg" alt="" srcset="">
-                </div>
-            <div class="pages">
-                <div class="page-number">
-                    <a href="" class="active">1</a>
-                </div>
-                <div class="page-number">
-                    <a href="">2</a>
-                </div>
-            </div>
-            <div class="next">
-                <img src="~/Icons/iconfinder_right_1303890.svg" alt="" srcset="">
-            </div>*@
         </div>
     </div>
 </div>
+
+
 
 
 

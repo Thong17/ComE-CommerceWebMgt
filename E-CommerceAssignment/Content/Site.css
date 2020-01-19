@@ -20,6 +20,57 @@ main {
 }
 
 
+.loading {
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+}
+
+    .loading span {
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        background-color: #111;
+        border-radius: 50%;
+        margin: 0 3px;
+        animation: loading 1.5s infinite ease-in-out;
+    }
+
+        .loading span:first-child {
+            animation-delay: 0.4s;
+        }
+
+        .loading span:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        .loading span:nth-child(3) {
+            animation-delay: 0.8s;
+        }
+
+@keyframes loading {
+    25% {
+        transform: scale(0.5);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(0.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 /* Navbar */
 .logo {
     color: #111;
@@ -250,11 +301,15 @@ nav ul {
 /* Slider */
 .slider {
     width: 100%;
-    height: 350px;
-    background-color: #f2f2f2;
+    height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.items img {
+    height: 60vh;
+    object-fit: contain;
 }
 
 .sub-content {
@@ -861,57 +916,6 @@ hr.style-six {
     }
 
 
-
-/*Loading Animation*/
-.loading {
-    width: 100%;
-    height: 100vh;
-    background-color: hsla(0, 0%, 100%, 0.384);
-    display: flex;
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-}
-
-    .loading span {
-        width: 15px;
-        height: 15px;
-        display: inline-block;
-        background-color: #111;
-        border-radius: 50%;
-        margin: 0 3px;
-        animation: loading 1.5s infinite ease-in-out;
-    }
-
-        .loading span:first-child {
-            animation-delay: 0.4s;
-        }
-
-        .loading span:nth-child(2) {
-            animation-delay: 0.6s;
-        }
-
-        .loading span:nth-child(3) {
-            animation-delay: 0.8s;
-        }
-
-@keyframes loading {
-    25% {
-        transform: scale(0.5);
-    }
-
-    50% {
-        transform: scale(1);
-    }
-
-    75% {
-        transform: scale(0.5);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
 
 
 /*Footer*/
