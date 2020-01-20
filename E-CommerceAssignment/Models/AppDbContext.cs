@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_CommerceAssignment.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -957,6 +958,34 @@ namespace E_CommerceAssignment.Models
 
                 con.Open();
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        public List<GetModelViewModels> getModelDetails
+        {
+            get
+            {
+                string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+                List<GetModelViewModels> models = new List<GetModelViewModels>();
+
+                using(SqlConnection con = new SqlConnection(cs))
+                {
+                    SqlCommand cmd = new SqlCommand("getModelFormatted", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        GetModelViewModels model = new GetModelViewModels();
+                        model.Name = reader["Name"].ToString();
+                        model.Brand = reader["Brand"].ToString();
+                        model.Category = reader["Category"].ToString();
+
+                        models.Add(model);
+                    }
+                }
+                return models;
             }
         }
 

@@ -109,6 +109,18 @@ namespace E_CommerceAssignment.Controllers
             return View(result);
         }
 
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            AppDbContext dbContext = new AppDbContext();
+
+            List<GetModelViewModels> searchProducts = dbContext.getModelDetails.ToList();
+
+            var result = searchProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public ActionResult AddBrand()
         {

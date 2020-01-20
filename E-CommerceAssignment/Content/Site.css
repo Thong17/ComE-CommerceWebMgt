@@ -232,25 +232,23 @@ nav ul {
     font-size: 18px;
     font-weight: 300;
     outline: none;
-    border: none;
     font-family: 'Open Sans', sans-serif;
     background: none;
 }
-    .inp-search:focus {
-        border-bottom: 0.07px solid #777;
-    }
+
 
 #btn-search {
     width: 32px;
     background: none;
     border: none;
+    margin-left: 10px;
     height: 32px;
     text-decoration: none;
 }
 
-#search-result {
-    width: 70%;
-    background-color: aquamarine;
+.table tr {
+    height: 50px !important;
+    font-size: 18px;
 }
 
 .close-search {
