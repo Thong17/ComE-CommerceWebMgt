@@ -23,7 +23,7 @@
                     </div>
                     @using (Html.BeginForm("Search", "Product", FormMethod.Get, new { @class = "search-form" }))
                     {
-                        @Html.TextBox("search", null, new { @class = "inp-search", placeholder = "Search..." })
+                        @Html.TextBox("search", null, new { @class = "inp-search btn btn-default", placeholder = "Search..." })
                         <button type="submit" id="btn-search">
                             <img src="~/Icons/search.svg" alt="" srcset="">
                         </button>
