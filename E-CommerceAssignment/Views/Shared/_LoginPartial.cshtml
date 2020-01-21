@@ -6,7 +6,7 @@
         @Html.AntiForgeryToken()
 
         <li class="drop-header" style="margin: 8px !important">
-            <img class="avatar" src="~/Public/No Image/13095743_958381404259953_8795456963930238078_n.jpg" style="object-fit: cover" />
+            <img class="avatar" src="~/Public/No Image/13267917_976245395806887_5092380378848253949_n.jpg" style="object-fit: cover" />
             @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @style = "margin-left: 10px;"})
 
         </li>
@@ -19,7 +19,7 @@
             <a href="#">Setting</a>
         </li>
         <li class="divider"></li>
-        <li class="drop-footer"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li class="drop-footer"><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
 
     }
 }

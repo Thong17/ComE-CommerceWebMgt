@@ -21,6 +21,7 @@ main {
 
 
 .loading {
+    top: 0;
     width: 100%;
     position: fixed;
     height: 100%;
@@ -42,15 +43,15 @@ main {
     }
 
         .loading span:first-child {
-            animation-delay: 0.4s;
+            animation-delay: 0.1s;
         }
 
         .loading span:nth-child(2) {
-            animation-delay: 0.6s;
+            animation-delay: 0.3s;
         }
 
         .loading span:nth-child(3) {
-            animation-delay: 0.8s;
+            animation-delay: 0.5s;
         }
 
 @keyframes loading {
@@ -215,6 +216,7 @@ nav ul {
 }
 .search-bar {
     display: flex;
+    margin-top: 20px;
     width: 100%;
     justify-content: center;
 }
@@ -228,7 +230,7 @@ nav ul {
     justify-content: center;
 }
 .inp-search {
-    width: 50%;
+    width: 30%;
     font-size: 18px;
     font-weight: 300;
     outline: none;
@@ -248,12 +250,13 @@ nav ul {
 
 .table tr {
     height: 50px !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
     font-size: 18px;
 }
 
 .close-search {
-    width: 13px;
-    height: 13px;
+    width: 18px;
+    height: 18px;
     position: absolute;
     top: 25px;
     left: 20px;
@@ -264,7 +267,7 @@ nav ul {
         height: 1px;
         width: 100%;
         position: absolute;
-        background-color: #333 !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
     }
 
 .span1 {

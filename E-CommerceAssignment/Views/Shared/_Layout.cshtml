@@ -132,11 +132,7 @@
             </div>
         </div>
     </footer>
-    <div class="loading">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     @Scripts.Render("~/bundles/custome")
     @RenderSection("scripts", required: false)
@@ -151,9 +147,9 @@
                     type: 'post',
                     success: function (data) {
                         console.log(data)
-                        var result = "<tr><th>Product</th><th>Brand</th><th>Category</th></tr>"
+                        var result = "<h3>Result</h3>"
                         $.each(data, function (index, value) {
-                            result += "<tr><td>" + value.Name + "</td><td>" + value.Brand + "</td><td>" + value.Category + "</td></tr><hr>"
+                            result += "<tr><td>" + value.Name + "</td><td>" + value.Brand + "</td><td>" + value.Category + "</td></tr>"
                         })
                         $('.table').html(result)
                     }

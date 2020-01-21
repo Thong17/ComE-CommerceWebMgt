@@ -19,7 +19,7 @@ $(document).ready(function () {
 });
 
 $(window).on("load", function () {
-    $(".loading").delay(1000).fadeOut("slow");
+    $(".loading").delay(500).fadeOut("slow");
 });
 // multiple handled with value 
 var pmdSliderValueRange = document.getElementById('pmd-slider-value-range');
