@@ -35,7 +35,7 @@
                             @Html.ActionLink("Edit", "EditBrand", new { id = item.BrandId }, new { @class = "btn btn-primary" })
                             @Html.ActionLink("Details", "Details", new { id = item.BrandId }, new { @class = "btn btn-default" })
 
-                            <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('@item.Brand brand may contain many products! Are you sure you want to delete this model?')" />
+                            <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('@item.Brand brand may contain many products! Are you sure you want to delete this?')" />
 
                         </td>
                     </tr>
