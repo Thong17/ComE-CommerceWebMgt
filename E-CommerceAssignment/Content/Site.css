@@ -20,6 +20,7 @@ main {
 }
 
 
+
 .loading {
     top: 0;
     width: 100%;
@@ -501,7 +502,6 @@ hr.style-six {
 
 /* Product list item */
 .product-list-items {
-    margin-top: 35px;
     background-color: #fff;
     display: grid;
     grid-gap: 30px;
@@ -679,6 +679,7 @@ hr.style-six {
 
     .product-list-items {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        position: relative;
     }
     /* Individual item */
     .item {

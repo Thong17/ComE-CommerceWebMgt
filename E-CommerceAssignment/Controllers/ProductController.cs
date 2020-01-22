@@ -13,7 +13,8 @@ namespace E_CommerceAssignment.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        public ActionResult Index(string search, int? page)
+        [HttpGet]
+        public ActionResult Index(int? page)
         {
             AppDbContext dbContext = new AppDbContext();
             ListProductViewModel listProduct = new ListProductViewModel();
@@ -51,7 +52,7 @@ namespace E_CommerceAssignment.Controllers
             }
 
             /*Search product and sort by date*/
-            listProduct.Products = getProducts.Where(p => p.Name.StartsWith(search ?? "", StringComparison.OrdinalIgnoreCase)).OrderByDescending(p => p.CreatedDate).ToList().ToPagedList(page ?? 1, 20);
+            listProduct.Products = getProducts.OrderByDescending(p => p.CreatedDate).ToList().ToPagedList(page ?? 1, 20);
 
 
             /*Get the number of each product in a brand*/
@@ -66,6 +67,46 @@ namespace E_CommerceAssignment.Controllers
             
             /*Create Index view with product details*/
             return View(listProduct);
+        }
+
+        [HttpPost]
+        public ActionResult FilterByPrice(int min, int max)
+        {
+            AppDbContext dbContext = new AppDbContext();
+            List<GetProductViewModel> viewModels = new List<GetProductViewModel>();
+            List<ProductModels> products = dbContext.getProductByPrice(min, max).OrderByDescending(p => p.CreatedDate).ToList();
+                
+            foreach(var product in products)
+            {
+                ModelModels model = dbContext.getModels.SingleOrDefault(m => m.Id == product.ModelId);
+                BrandModels brand = dbContext.getBrands.SingleOrDefault(b => b.BrandId == product.BrandId);
+                CategoryModels category = dbContext.getCategories.SingleOrDefault(c => c.CategoryId == product.CategoryId);
+
+                GetProductViewModel getProduct = new GetProductViewModel
+                {
+                    Id = product.Id,
+                    Name = model.Name,
+                    Brand = brand.Brand,
+                    Category = category.Category,
+                    Price = product.Price,
+                    Color = product.Color,
+                    Storage = product.Storage,
+                    Processor = product.Processor,
+                    Memory = product.Memory,
+                    Display = product.Display,
+                    Details = product.Details,
+                    CreatedBy = product.CreatedBy,
+                    CreatedDate = product.CreatedDate
+                };
+
+                getProduct.Photos = dbContext.getProductPhotos(product.Id).ToList();
+
+
+
+                viewModels.Add(getProduct);
+            }
+
+            return Json(viewModels, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

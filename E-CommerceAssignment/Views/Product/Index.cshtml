@@ -53,7 +53,7 @@
             <h3>Filter by price</h3>
             <div class="price-slider">
                 <!-- Range slider -->
-                <div id="pmd-slider-value-range" class="pmd-range-slider" min="0" max="9999"></div>
+                <div id="pmd-slider-value-range" class="pmd-range-slider" min="0" max="5000"></div>
                 <!-- Price input -->
                 <div class="rangePrice">
                     <p>Price:</p>
@@ -95,43 +95,16 @@
                     <p>Sort by date</p>
                     <div class="dropdown"></div>
                 </div>
-                <p>Showing result 1 - @Model.Products.Count() of @Model.Products.TotalItemCount</p>
+                <p id="resultCount"></p><p style="margin-left: -16px">of @Model.Products.TotalItemCount</p>
             </div>
         </div>
         <br />
         <hr />
-        <div class="product-list-items">
-            @foreach (var item in Model.Products)
-            {
-                <a href="/Product/EditProduct/@item.Id" class="item">
-                    <div id="slider">
-                        @foreach (var photo in item.Photos)
-                        {
-                            <div class="item-img">
-                                <img src="@photo.Path/@photo.Title" alt="@photo.Title" />
-                            </div>
-                        }
-                    </div>
+        <div class="product-list-items"></div>
 
-
-                    <div class="item-detail">
-                        <h5>@item.Name</h5>
-                        <h5>@item.Storage</h5>
-                        <div class="price">
-                            <p>$@item.Price</p>
-                            <p>$1799</p>
-                        </div>
-
-                    </div>
-                </a>
-            }
-
-
-        </div>
-
-        <div class="action-btn">
+        @*<div class="action-btn">
             @Html.PagedListPager(Model.Products, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
-        </div>
+        </div>*@
     </div>
 </div>
 

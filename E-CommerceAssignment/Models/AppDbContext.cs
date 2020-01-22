@@ -15,7 +15,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("addBrand", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -39,7 +39,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("addCategory", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -63,7 +63,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("addModel", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -217,7 +217,7 @@ namespace E_CommerceAssignment.Models
                 string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
                 List<BrandModels> brands = new List<BrandModels>();
 
-                using(SqlConnection con = new SqlConnection(cs))
+                using (SqlConnection con = new SqlConnection(cs))
                 {
                     SqlCommand cmd = new SqlCommand("getBrands", con);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -271,7 +271,7 @@ namespace E_CommerceAssignment.Models
                 string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
                 List<ModelModels> models = new List<ModelModels>();
 
-                using(SqlConnection con = new SqlConnection(cs))
+                using (SqlConnection con = new SqlConnection(cs))
                 {
                     SqlCommand cmd = new SqlCommand("getModels", con);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -370,7 +370,7 @@ namespace E_CommerceAssignment.Models
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
             List<ProductPhoto> photos = new List<ProductPhoto>();
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("getProductPhotos", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -401,7 +401,7 @@ namespace E_CommerceAssignment.Models
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
             List<ProductModels> products = new List<ProductModels>();
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("getProductModels", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -476,7 +476,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("updateBrand", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -534,7 +534,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("updateModel", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -568,7 +568,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("updateProduct", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -664,7 +664,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("deleteProductPhoto", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -678,12 +678,12 @@ namespace E_CommerceAssignment.Models
                 cmd.ExecuteNonQuery();
             }
         }
-        
+
         public void deleteProduct(int id)
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("deleteProduct", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -702,7 +702,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("deleteModel", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -721,7 +721,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("deleteBrand", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -740,7 +740,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("deleteCategory", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -758,7 +758,7 @@ namespace E_CommerceAssignment.Models
         {
             string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
 
-            using(SqlConnection con = new SqlConnection(cs))
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("addEditedProduct", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -847,7 +847,7 @@ namespace E_CommerceAssignment.Models
 
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                   
+
                     SqlCommand cmd = new SqlCommand("getEditedProduct", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     con.Open();
@@ -968,7 +968,7 @@ namespace E_CommerceAssignment.Models
                 string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
                 List<GetModelViewModels> models = new List<GetModelViewModels>();
 
-                using(SqlConnection con = new SqlConnection(cs))
+                using (SqlConnection con = new SqlConnection(cs))
                 {
                     SqlCommand cmd = new SqlCommand("getModelFormatted", con);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -987,6 +987,51 @@ namespace E_CommerceAssignment.Models
                 }
                 return models;
             }
+        }
+
+        public List<ProductModels> getProductByPrice(int min, int max)
+        {
+            string cs = ConfigurationManager.ConnectionStrings["Con"].ConnectionString;
+            List<ProductModels> getProducts = new List<ProductModels>();
+
+            using (SqlConnection con = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("getProductFilterByPrice", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramMin = new SqlParameter();
+                paramMin.ParameterName = "@Min";
+                paramMin.Value = min;
+                cmd.Parameters.Add(paramMin);
+
+                SqlParameter paramMax = new SqlParameter();
+                paramMax.ParameterName = "@Max";
+                paramMax.Value = max;
+                cmd.Parameters.Add(paramMax);
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ProductModels product = new ProductModels();
+                    product.Id = Convert.ToInt32(reader["Id"]);
+                    product.Price = Convert.ToDouble(reader["Price"]);
+                    product.Color = reader["Color"].ToString();
+                    product.Storage = reader["Storage"].ToString();
+                    product.Processor = reader["Processor"].ToString();
+                    product.Memory = reader["Memory"].ToString();
+                    product.Display = reader["Display"].ToString();
+                    product.BrandId = Convert.ToInt32(reader["BrandId"]);
+                    product.CategoryId = Convert.ToInt32(reader["CategoryId"]);
+                    product.ModelId = Convert.ToInt32(reader["ModelId"]);
+                    product.Details = reader["Details"].ToString();
+                    product.CreatedBy = reader["CreatedBy"].ToString();
+                    product.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+
+                    getProducts.Add(product);
+                }
+            }
+            return getProducts;
         }
 
     }

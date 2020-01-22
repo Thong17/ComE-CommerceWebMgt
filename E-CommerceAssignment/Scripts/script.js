@@ -25,7 +25,7 @@ $(window).on("load", function () {
 var pmdSliderValueRange = document.getElementById('pmd-slider-value-range');
 
 noUiSlider.create(pmdSliderValueRange, {
-    start: [700, 2700], // Handle start position
+    start: [500, 4000], // Handle start position
     connect: true, // Display a colored bar between the handles
     tooltips: [wNumb({ decimals: 0 }), wNumb({ decimals: 0 })],
     format: wNumb({
@@ -34,9 +34,9 @@ noUiSlider.create(pmdSliderValueRange, {
         postfix: '',
 
     }),
-    range: { // Slider can select '0' to '100'
+    range: { // Slider can select '0' to '9999'
         'min': 0,
-        'max': 3000
+        'max': 5000
     },
 });
 
@@ -47,6 +47,34 @@ var valueMax = document.getElementById('value-max'),
 pmdSliderValueRange.noUiSlider.on('update', function (values, handle) {
     if (handle) {
         valueMax.innerText = '$' + values[handle];
+        console.log(values)
+        $.ajax({
+            url: 'Product/FilterByPrice',
+            type: 'POST',
+            data: { min: values[0], max: values[1] },
+            beforeSend: function () {
+                $('#wating').delay(1000).show(0)
+            },
+            complete: function () {
+                $('#wating').hide()
+            },
+            success: function (data) {
+                var resultCount = '';
+                var result = '';
+                $.each(data, function (index, value) {
+                    result += '<a href="/Product/EditProduct/' + value.Id + '" class="item"><div id="slider">'
+                    $.each(value.Photos, function (index, item) {
+                        result += '<div class="item-img"><img src = "' + item.Path + '/' + item.Title + '" alt = "' + item.Title+ '" /></div>'
+                    })
+                    result += `</div><div class="item-detail"><h5>` + value.Name + `</h5 ><h5>` + value.Storage + `</h5><div class="price"><p>$` + value.Price + `</p><p>$1799</p></div></div></a>`
+                    
+                
+                })
+                $('.product-list-items').html(result)
+                resultCount += '<p>Showing result 1 - ' + data.length + '</p>'
+                $('#resultCount').html(resultCount)
+            }
+        })
     } else {
         valueMin.innerText = '$' + values[handle];
     }

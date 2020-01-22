@@ -196,6 +196,7 @@
     <Compile Include="ViewModels\AddModelViewModels.cs" />
     <Compile Include="ViewModels\AddProductViewModel.cs" />
     <Compile Include="ViewModels\AllProductListViewModel.cs" />
+    <Compile Include="ViewModels\EditeProductDetailsViewModel.cs" />
     <Compile Include="ViewModels\EditModelViewModels.cs" />
     <Compile Include="ViewModels\EditPhotoViewModel.cs" />
     <Compile Include="ViewModels\EditProductViewModel.cs" />
